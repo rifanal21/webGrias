@@ -1,14 +1,14 @@
 /* =====================================================
    DATA.JS — EDIT ISI WEBSITE DI SINI
-   File ini berisi semua isi website. Ubah teks di antara tanda kutip,
-   simpan, lalu refresh browser. Jangan hapus tanda koma, kurung, atau kutip.
+   Ubah teks di antara tanda kutip, simpan, lalu refresh browser.
+   Jangan hapus tanda koma, kurung, atau kutip.
    ===================================================== */
 const SITE = {
   nama: "GRIAS",
-  namaAksen: "PROPERTY",           // bagian berwarna emas di logo
+  namaAksen: "PROPERTY",           // bagian italic emas di logo
   menu: [["Tentang","#tentang"],["Layanan","#layanan"],["Proyek","#proyek"],["Proses","#proses"],["Kontak","#kontak"]],
 
-  // Teks berjalan di bawah hero. Tambah/ubah kata sesukamu.
+  // Teks berjalan di pita emas di bawah hero
   berjalan: ["Arsitektur Tropis","Desain Minimalis","Hunian Modern","Interior","Konsultasi Properti"],
 
   hero: {
@@ -22,9 +22,10 @@ const SITE = {
     judul: "Ruang yang tenang, rancangan yang jujur.",
     paragraf: [
       "Kami percaya rumah yang baik tidak perlu berlebihan. Cahaya alami, sirkulasi udara, dan material yang jujur adalah dasar setiap rancangan kami.",
-      "Dari studio kami di Aceh, kami mendampingi klien dari gagasan pertama hingga kunci diserahkan."
+      "Dari studio kami di Bali, kami mendampingi klien dari gagasan pertama hingga kunci diserahkan."
     ],
-    statistik: [["50+","Proyek Selesai"],["8","Tahun Pengalaman"],["30+","Klien Puas"]]
+    // Pasangan [angka, keterangan]. Item ke-2 juga tampil di kotak emas pada gambar.
+    statistik: [["50+","Proyek Selesai"],["8","Tahun Pengalaman"],["30+","Klien Puas"],["1","Studio di Aceh "]]
   },
 
   layanan: {
@@ -39,11 +40,12 @@ const SITE = {
   proyek: {
     label: "Proyek Pilihan", judul: "Karya terbaru kami.",
     daftar: [
-      // gambar: isi dengan link foto (https://...) atau nama file lokal (foto/rumah1.jpg).
-      // Jika kosong, otomatis memakai warna latar polos.
+      // gambar: isi link foto (https://...) atau nama file (foto/rumah1.jpg).
+      // Kalau kosong, otomatis memakai ilustrasi rumah.
       {nama:"Rumah Teduh", info:"Hunian Tropis · Aceh · 2025", gambar:""},
-      {nama:"Rumah Pelataran", info:"Hunian Keluarga · Aceh · 2024", gambar:""},
-      {nama:"Rumah sakit", info:"Komersial · Aceh · 2024", gambar:""}
+      {nama:"Villa Senja", info:"Villa · Ubud · 2025", gambar:""},
+      {nama:"Rumah Pelataran", info:"Hunian Keluarga · Aceh  · 2024", gambar:""},
+      {nama:"Studio Langit", info:"Komersial · Aceh  · 2024", gambar:""}
     ]
   },
 
@@ -57,15 +59,23 @@ const SITE = {
     ]
   },
 
+  testimoni: {
+    label: "Kata Klien", judul: "Mereka yang sudah percaya.",
+    daftar: [
+      {teks:"Rumahnya terasa sejuk dan terang sepanjang hari. Prosesnya rapi dan komunikatifnya enak.", nama:"Contoh Klien A", peran:"Pemilik Rumah Teduh"},
+      {teks:"Desainnya sederhana tapi berkelas. Banyak tamu yang bertanya siapa arsiteknya.", nama:"Contoh Klien B", peran:"Pemilik Villa Senja"},
+      {teks:"Dari konsultasi sampai serah terima, semuanya sesuai rencana dan anggaran.", nama:"Contoh Klien C", peran:"Pemilik Rumah Pelataran"}
+    ]
+  },
+
   kontak: {
     label: "Kontak", judul: "Mari bicarakan rumah impian Anda.",
     teks: "Ceritakan rencana Anda, kami siap membantu dari tahap paling awal.",
     tombol: "Kirim Pesan WhatsApp",
-    wa: "6285360620605",             
+    wa: "6285360620605",             // nomor WA tanpa tanda + dan spasi
     pesanWA: "Halo Grias Property, saya ingin berkonsultasi.",
-    info: [["Studio","Aceh, Indonesia"],["Email","halo@griasproperty.com"],["WhatsApp","+62 853 6062 0605"],["Instagram","@griasproperty"]]
+    info: [["Studio","Aceh, Indonesia"],["Email","halo@griasproperty.com"],["WhatsApp","+62 853-6062-0605"],["Instagram","@griasproperty"]]
   },
 
   footer: "© 2026 GRIAS PROPERTY. SEMUA HAK DILINDUNGI."
 };
-/* ================== AKHIR BAGIAN EDIT ================== */
