@@ -145,6 +145,16 @@ nav ul a:hover::after{width:100%}
 .contact .label::before,.contact .label::after{content:"";width:46px;height:1px;background:var(--ink)}
 .contact h2{margin:0 auto 26px;font-size:clamp(2.6rem,6vw,5.2rem);max-width:900px}
 .contact p{max-width:480px;margin:0 auto 42px}
+.cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn.ghost{border-color:var(--ink);color:var(--ink)}
+.btn.ghost::before{background:var(--ink)}
+.btn.ghost:hover{color:var(--gold2)}
+.info a{border-bottom:1px solid currentColor}
+.info a:hover{opacity:.6}
+#waFloat{position:fixed;right:26px;bottom:26px;z-index:30;width:58px;height:58px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;box-shadow:0 10px 30px -8px rgba(0,0,0,.5);transition:transform .4s var(--ease);animation:wapulse 2.6s infinite}
+#waFloat:hover{transform:scale(1.12)}
+#waFloat svg{width:30px;height:30px}
+@keyframes wapulse{0%{box-shadow:0 0 0 0 rgba(201,164,92,.6)}70%,100%{box-shadow:0 0 0 20px rgba(201,164,92,0)}}
 .info{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:100px;padding-top:40px;border-top:1px solid rgba(13,13,13,.25);text-align:left;font-size:.95rem}
 .info b{display:block;font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;font-weight:500;margin-bottom:8px;opacity:.65}
 footer{background:var(--ink);color:#777;text-align:center;padding:34px;font-size:.7rem;letter-spacing:.25em}
@@ -232,9 +242,10 @@ nav,nav.scrolled{padding:18px 24px}nav ul{display:none}
   <span class="label" id="ctLabel"></span>
   <h2 id="ctTitle"></h2>
   <p id="ctText"></p>
-  <a class="btn solid" id="ctBtn"></a>
+  <div class="cta"><a class="btn solid" id="ctBtn"></a><a class="btn ghost" id="igBtn" target="_blank" rel="noopener"></a></div>
   <div class="info" id="info"></div>
 </div></section>
+<a id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Chat WhatsApp"><svg viewBox="0 0 32 32"><path d="M5 6h22v16H14l-7 5v-5H5z" fill="currentColor"/><circle cx="11" cy="14" r="1.6" fill="#c9a45c"/><circle cx="16" cy="14" r="1.6" fill="#c9a45c"/><circle cx="21" cy="14" r="1.6" fill="#c9a45c"/></svg></a>
 <footer id="footer"></footer>
 
 <script src="data.js"></script>
@@ -310,7 +321,22 @@ $('ctText').textContent = S.kontak.teks;
 $('ctBtn').textContent = S.kontak.tombol;
 $('ctBtn').href = `https://wa.me/${S.kontak.wa}?text=${encodeURIComponent(S.kontak.pesanWA)}`;
 $('ctBtn').target = '_blank';
-$('info').innerHTML = S.kontak.info.map(i => `<div><b>${i[0]}</b>${i[1]}</div>`).join('');
+const igInfo = (S.kontak.info.find(i => /instagram|^ig$/i.test(i[0])) || [])[1] || '';
+const igRaw = (S.kontak.instagram || igInfo || '').trim();
+const igUrl = !igRaw ? '' : /^https?:\/\//i.test(igRaw) ? igRaw : `https://instagram.com/${igRaw.replace('@','')}`;
+const ig = igUrl ? (igUrl.split('?')[0].split('/').filter(Boolean).pop() || 'instagram').replace('@','') : '';
+$('igBtn').style.display = ig ? '' : 'none';
+if (ig){ $('igBtn').href = igUrl; $('igBtn').textContent = 'Instagram @' + ig; }
+const waUrl = `https://wa.me/${S.kontak.wa}?text=${encodeURIComponent(S.kontak.pesanWA)}`;
+$('info').innerHTML = S.kontak.info.map(i => {
+  const k = i[0].toLowerCase(); let href = '';
+  if (k.includes('whatsapp') || k === 'wa') href = waUrl;
+  else if (k.includes('instagram') || k === 'ig') href = igUrl;
+  else if (k.includes('email') || i[1].includes('@') && i[1].includes('.') && !i[1].startsWith('@')) href = 'mailto:' + i[1];
+  const val = href ? `<a href="${href}" ${href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${i[1]}</a>` : i[1];
+  return `<div><b>${i[0]}</b>${val}</div>`;
+}).join('');
+$('waFloat').href = waUrl;
 $('footer').textContent = S.footer;
 
 /* jeda bertahap untuk kartu dalam satu baris */

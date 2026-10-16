@@ -74,6 +74,7 @@ const SITE = {
     tombol: "Kirim Pesan WhatsApp",
     wa: "6285360620605",             // nomor WA tanpa tanda + dan spasi
     pesanWA: "Halo Grias Property, saya ingin berkonsultasi.",
+    instagram: "https://www.instagram.com/griasproperty?psln=eG1rdHBlbXB1bHo5",
     info: [["Studio","Aceh, Indonesia"],["Email","halo@griasproperty.com"],["WhatsApp","+62 853-6062-0605"],["Instagram","@griasproperty"]]
   },
 
